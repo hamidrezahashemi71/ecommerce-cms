@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { sahel } from '@/lib/fonts'
 import { ClerkProvider } from '@clerk/nextjs'
+import { ModalProvider } from '@/providers/modalProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,6 +15,7 @@ export default function RootLayout(props: LayoutProp) {
     <ClerkProvider>
       <html lang="fa" dir='rtl'>
         <body className={`${sahel.variable} font-sahel`}>
+          <ModalProvider />
           {children}
         </body>
       </html>
