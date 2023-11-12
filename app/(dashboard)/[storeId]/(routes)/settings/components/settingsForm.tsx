@@ -15,6 +15,7 @@ import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import AlertModal from "@/components/ui/modals/alertModal"
 import ApiAlert from "@/components/ui/apiAlert"
+import { useOrigin } from "@/hooks/useDashOrigins"
 
 type SettingsFormValues = zod.infer<typeof formSchema>
 
@@ -32,6 +33,7 @@ export default function SettingsForm(props: SettingsFormProps) {
   const [loading, setLoading] = useState(false)
   const params = useParams()
   const { refresh, push } = useRouter()
+  const origin = useOrigin()
 
   const form = useForm<SettingsFormValues>({
     resolver: zodResolver(formSchema),
