@@ -1,6 +1,6 @@
 import prismadb from "@/lib/prismadb"
 
-type DashboardPageProps = {
+interface DashboardPageProps {
   params: { storeId: string }
 }
 

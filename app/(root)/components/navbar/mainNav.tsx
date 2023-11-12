@@ -18,6 +18,11 @@ export default function MainNav({
       active: pathname === `/${params.storeId}`
     },
     {
+      href: `/${params.storeId}/billboards`,
+      label: 'بیلبوردها',
+      active: pathname === `/${params.storeId}/billboards`
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: 'تنظیمات',
       active: pathname === `/${params.storeId}/settings`
@@ -25,14 +30,14 @@ export default function MainNav({
   ]
 
   return (
-    <nav className={cn("flex items-center gap-4 lg:space-x-6", className)}>
+    <nav className={cn("flex items-center gap-x-6 ", className)}>
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            "text-sm font-medium hover:text-primary transition-all",
-            route.active ? "text-black dark:text-white" : "text-muted-foreground"
+            "text-sm hover:text-primary transition-all",
+            route.active ? "text-black dark:text-white font-medium" : "text-muted-foreground"
           )}
         >
           {route.label}
