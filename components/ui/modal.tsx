@@ -2,14 +2,6 @@
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
-interface ModalProps {
-  title: string
-  description: string
-  isOpen: boolean
-  onClose: () => void
-  children: React.ReactNode
-}
-
 export function Modal(props: ModalProps) {
   const { title, description, isOpen, onClose, children } = props
 

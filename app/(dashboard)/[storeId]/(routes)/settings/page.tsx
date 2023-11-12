@@ -1,10 +1,10 @@
-import Navbar from "@/app/(root)/components/navbar/navbar"
 import prismadb from "@/lib/prismadb"
 import { auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
+import SettingsForm from "./components/settingsForm"
 
-export default async function DashboardLayout(props: DashboardLayoutProps) {
-  const { children, params } = props
+export default async function SettingsPage(props: SettingsPageProps) {
+  const { params } = props
   const { userId } = auth()
 
   if(!userId) redirect("/sign-in")
@@ -19,9 +19,10 @@ export default async function DashboardLayout(props: DashboardLayoutProps) {
   if(!store) redirect('/')
 
   return (
-    <>
-      <Navbar />
-      {children}
-    </>
+    <div className="flex-col">
+      <div className="flex-1 space-y-4 p-8 pt-6">
+        <SettingsForm initialData={store} />
+      </div>
+    </div>
   )
 }

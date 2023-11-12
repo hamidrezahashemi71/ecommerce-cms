@@ -12,6 +12,8 @@ import { useState } from "react"
 import axios from "axios"
 import toast from "react-hot-toast"
 
+type StoreFormValues = zod.infer<typeof formSchema>
+
 const formSchema = zod.object({
   name: zod.string().min(1)
 })
@@ -20,14 +22,14 @@ export default function StoreModal() {
   const storeModal = useStoreModal()
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<zod.infer<typeof formSchema>>({
+  const form = useForm<StoreFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: ''
     }
   })
 
-  const onSubmit = async(values: zod.infer<typeof formSchema>) => {
+  const onSubmit = async(values: StoreFormValues) => {
     try {
 
       setLoading(true)

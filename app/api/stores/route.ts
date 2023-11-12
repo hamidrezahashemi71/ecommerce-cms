@@ -8,8 +8,9 @@ export async function POST(req: Request) {
     const body = await req.json()
     const { name } = body
 
-    if(!userId) new NextResponse('Unauthorized', { status: 401 })
-    if(!name) new NextResponse('Name is required', { status: 400 })
+    if(!userId) return new NextResponse('Unauthorized', { status: 401 })
+    if(!name) return new NextResponse('Name is required', { status: 400 })
+
     const store = await prismadb.store.create({
       data: {
         userId,
@@ -20,7 +21,9 @@ export async function POST(req: Request) {
     return NextResponse.json(store)
 
   } catch (error) {
+
     console.log('[STORES_POST]', error)
     return new NextResponse('Internal Error', { status: 500 })
+
   }
 }
