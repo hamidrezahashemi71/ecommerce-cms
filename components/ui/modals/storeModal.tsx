@@ -8,6 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import axios from "axios"
+import toast from "react-hot-toast"
 
 const formSchema = zod.object({
   name: zod.string().min(1)
@@ -15,6 +18,8 @@ const formSchema = zod.object({
 
 export default function StoreModal() {
   const storeModal = useStoreModal()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<zod.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -23,7 +28,23 @@ export default function StoreModal() {
   })
 
   const onSubmit = async(values: zod.infer<typeof formSchema>) => {
-    console.log("values", values)
+    try {
+
+      setLoading(true)
+      const res = await axios.post("/api/stores", values)
+      toast.success("فروشگاه ساخته شد")
+      console.log("respones", res.data)
+
+    } catch (error) {
+
+      console.log("[SUBMIT_STORE]", error)
+      toast.error("مشکلی پیش آمد")
+
+    } finally {
+
+      setLoading(false)
+
+    }
   }
 
   return (
@@ -46,6 +67,7 @@ export default function StoreModal() {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      disabled={loading}
                       placeholder="فروشگاه"
                       { ...field }
                     />
@@ -58,12 +80,16 @@ export default function StoreModal() {
            />
             <div className="pt-6 flex items-center justify-end gap-2 w-full">
               <Button
+                disabled={loading}
                 variant='outline'
                 onClick={storeModal.onClose}
               >
                 {"لغو"}
               </Button>
-              <Button type="submit">
+              <Button
+                disabled={loading}
+                type="submit"
+              >
                 {"ادامه"}
               </Button>
             </div>
