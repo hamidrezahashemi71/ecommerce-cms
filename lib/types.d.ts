@@ -40,4 +40,16 @@ interface AlertModalProps {
   loading: boolean
 }
 
+interface ApiAlertProps {
+  title: string
+  description: string
+  variant: "public" | "admin"
+}
+
+// HOOKS
+interface UseStoreModalType {
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+}
 

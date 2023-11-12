@@ -14,6 +14,7 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import AlertModal from "@/components/ui/modals/alertModal"
+import ApiAlert from "@/components/ui/apiAlert"
 
 type SettingsFormValues = zod.infer<typeof formSchema>
 
@@ -136,6 +137,12 @@ export default function SettingsForm(props: SettingsFormProps) {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        variant="public"
+      />
     </>
   )
 }
