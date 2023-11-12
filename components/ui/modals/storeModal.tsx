@@ -32,8 +32,7 @@ export default function StoreModal() {
 
       setLoading(true)
       const res = await axios.post("/api/stores", values)
-      toast.success("فروشگاه ساخته شد")
-      console.log("respones", res.data)
+      window.location.assign(`/${res.data.id}`) // fully refresh to fully push data to db
 
     } catch (error) {
 
