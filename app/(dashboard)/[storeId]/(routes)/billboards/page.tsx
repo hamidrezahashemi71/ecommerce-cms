@@ -6,6 +6,7 @@ import moment from "jalali-moment"
 
 export default async function Billboards(props: DashboardLayoutProps) {
   const { params } = props
+
   const billboards = await prismadb.billboard.findMany({
     where: {
       storeId: params.storeId

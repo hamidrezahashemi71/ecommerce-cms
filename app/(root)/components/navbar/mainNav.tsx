@@ -18,6 +18,11 @@ export default function MainNav({
       active: pathname === `/${params.storeId}`
     },
     {
+      href: `/${params.storeId}/categories`,
+      label: 'دسته بندی ها',
+      active: pathname === `/${params.storeId}/categories`
+    },
+    {
       href: `/${params.storeId}/billboards`,
       label: 'بیلبوردها',
       active: pathname === `/${params.storeId}/billboards`

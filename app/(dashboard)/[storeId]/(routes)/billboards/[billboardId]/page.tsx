@@ -8,6 +8,7 @@ interface NewBillboardPageProps {
 
 export default async function Billboard(props: NewBillboardPageProps) {
   const { params } = props
+
   const billboard = await prismadb.billboard.findUnique({
     where: {
       id: params.billboardId
