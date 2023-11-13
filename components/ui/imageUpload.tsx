@@ -40,9 +40,11 @@ export default function ImageUpload(props: ImageUploadProps) {
             </div>
             <Image
               fill
+              sizes="max-w-[200px]"
               className="object-cover"
               alt="image"
               src={url}
+              priority
             />
           </div>
         ))}

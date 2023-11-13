@@ -14,7 +14,6 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import AlertModal from "@/components/ui/modals/alertModal"
-import { useOrigin } from "@/hooks/useDashOrigins"
 import ImageUpload from "@/components/ui/imageUpload"
 
 type BillboardFormValues = zod.infer<typeof formSchema>
@@ -34,7 +33,6 @@ export default function BillboardForm(props: BillboardFormProps) {
   const [loading, setLoading] = useState(false)
   const params = useParams()
   const { refresh, push } = useRouter()
-  const origin = useOrigin()
 
   const title = initialData ? "ویرایش بیلبورد" : "ایجاد بیلبورد"
   const description = initialData ? "بیلبورد را ویرایش کنید" : "بیلبورد جدید بسازید"
@@ -61,6 +59,7 @@ export default function BillboardForm(props: BillboardFormProps) {
       }
 
       refresh()
+      push(`/${params.storeId}/billboards`)
       toast.success(toastMessage)
 
     } catch (error) {
@@ -79,7 +78,7 @@ export default function BillboardForm(props: BillboardFormProps) {
 
       setLoading(true)
       await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
-      push("/")
+      push(`/${params.storeId}/billboards`)
       toast.success("بیلبورد حذف شد")
 
     } catch (error) {
@@ -126,7 +125,7 @@ export default function BillboardForm(props: BillboardFormProps) {
         >
           <FormField
             control={form.control}
-            name="label"
+            name="imageUrl"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -140,6 +139,9 @@ export default function BillboardForm(props: BillboardFormProps) {
                     onRemove={() => field.onChange("")}
                   />
                 </FormControl>
+                <FormMessage>
+                    {"بارگزاری تصویر بیلبورد الزامی است."}
+                  </FormMessage>
               </FormItem>
             )}
           />
@@ -174,7 +176,6 @@ export default function BillboardForm(props: BillboardFormProps) {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   )
 }
