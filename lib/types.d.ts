@@ -53,3 +53,10 @@ interface UseStoreModalType {
   onClose: () => void
 }
 
+// IMAGE UPLOAD
+interface ImageUploadProps {
+  disabled: boolean
+  onChange: (value: string) => void
+  onRemove: (value: string) => void
+  value: string[]
+}

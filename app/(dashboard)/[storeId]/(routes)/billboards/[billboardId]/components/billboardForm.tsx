@@ -14,8 +14,8 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import AlertModal from "@/components/ui/modals/alertModal"
-import ApiAlert from "@/components/ui/apiAlert"
 import { useOrigin } from "@/hooks/useDashOrigins"
+import ImageUpload from "@/components/ui/imageUpload"
 
 type BillboardFormValues = zod.infer<typeof formSchema>
 
@@ -53,13 +53,18 @@ export default function BillboardForm(props: BillboardFormProps) {
     try {
 
       setLoading(true)
-      await axios.patch(`/api/stores/${params.storeId}`, values)
+
+      if(initialData) {
+        await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, values)
+      } else {
+        await axios.post(`/api/${params.storeId}/billboards`, values)
+      }
+
       refresh()
-      toast.success("فروشگاه ویرایش شد")
+      toast.success(toastMessage)
 
     } catch (error) {
 
-      console.log("[EDIT_STORE]", error)
       toast.error("مشکلی پیش آمد")
 
     } finally {
@@ -73,13 +78,13 @@ export default function BillboardForm(props: BillboardFormProps) {
     try {
 
       setLoading(true)
-      await axios.delete(`/api/stores/${params.storeId}`)
+      await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
       push("/")
-      toast.success("فروشگاه حذف شد")
+      toast.success("بیلبورد حذف شد")
 
     } catch (error) {
 
-      toast.error('مطمئن شوید که تمامی دسته بندی ها و محصولات را حذف کرده اید.')
+      toast.error('مطمئن شوید که تمامی دسته بندی های این بیلبورد را حذف کرده اید.')
 
     } finally {
 
@@ -119,6 +124,25 @@ export default function BillboardForm(props: BillboardFormProps) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
+          <FormField
+            control={form.control}
+            name="label"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {"تصویر پس زمینه"}
+                </FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
@@ -136,7 +160,7 @@ export default function BillboardForm(props: BillboardFormProps) {
                     />
                   </FormControl>
                   <FormMessage>
-                    {"نام فروشگاه الزامی است."}
+                    {"نام بیلبورد الزامی است."}
                   </FormMessage>
                 </FormItem>
               )}
