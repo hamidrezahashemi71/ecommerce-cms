@@ -18,14 +18,19 @@ export default function MainNav({
       active: pathname === `/${params.storeId}`
     },
     {
+      href: `/${params.storeId}/billboards`,
+      label: 'بیلبوردها',
+      active: pathname === `/${params.storeId}/billboards`
+    },
+    {
       href: `/${params.storeId}/categories`,
       label: 'دسته بندی ها',
       active: pathname === `/${params.storeId}/categories`
     },
     {
-      href: `/${params.storeId}/billboards`,
-      label: 'بیلبوردها',
-      active: pathname === `/${params.storeId}/billboards`
+      href: `/${params.storeId}/sizes`,
+      label: 'سایز ها',
+      active: pathname === `/${params.storeId}/sizes`
     },
     {
       href: `/${params.storeId}/settings`,
