@@ -181,7 +181,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                       </SelectContent>
                     </Select>
                   <FormMessage>
-                    {"عنوان دسته بندی الزامی است."}
+                    {"انتخاب بیلبورد الزامی است."}
                   </FormMessage>
                 </FormItem>
               )}
