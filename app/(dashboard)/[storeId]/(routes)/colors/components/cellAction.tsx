@@ -30,13 +30,13 @@ export default function CellAction(props: CellActionProps) {
     try {
 
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
-      toast.success("سایز حذف شد")
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`)
+      toast.success("رنگ حذف شد")
       refresh()
 
     } catch (error) {
 
-      toast.error('مطمئن شوید که تمامی محصولات مرتبط با این سایز را حذف کرده اید.')
+      toast.error('مطمئن شوید که تمامی محصولات مرتبط با این رنگ را حذف کرده اید.')
 
     } finally {
 
@@ -72,7 +72,7 @@ export default function CellAction(props: CellActionProps) {
           </DropdownMenuLabel>
           <DropdownMenuItem
             className="cursor-pointer hover:text-yellow-700 transition-colors"
-            onClick={() => push(`/${params.storeId}/sizes/${data.id}`)}
+            onClick={() => push(`/${params.storeId}/colors/${data.id}`)}
           >
             <Edit className="ml-2 h-4 w-4" />
             {"ویرایش"}
