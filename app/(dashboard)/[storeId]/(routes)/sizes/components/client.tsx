@@ -37,7 +37,7 @@ export default function SizeClient(props: SizeClientProps) {
       <DataTable
         columns={columns}
         data={data}
-        searchKey='name'
+        searchKey='value'
       />
       <Heading title='ای پی آی' description='ای پی آی های مربوط به سایزها' />
       <Separator />
