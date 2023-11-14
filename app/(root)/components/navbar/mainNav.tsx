@@ -33,6 +33,11 @@ export default function MainNav({
       active: pathname === `/${params.storeId}/sizes`
     },
     {
+      href: `/${params.storeId}/colors`,
+      label: 'رنگ ها',
+      active: pathname === `/${params.storeId}/colors`
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: 'تنظیمات',
       active: pathname === `/${params.storeId}/settings`
