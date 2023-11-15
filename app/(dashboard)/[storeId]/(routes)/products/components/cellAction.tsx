@@ -30,13 +30,13 @@ export default function CellAction(props: CellActionProps) {
     try {
 
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
-      toast.success("بیلبورد حذف شد")
+      await axios.delete(`/api/${params.storeId}/products/${data.id}`)
+      toast.success("محصول حذف شد")
       refresh()
 
     } catch (error) {
 
-      toast.error('مطمئن شوید که تمامی دسته بندی های این بیلبورد را حذف کرده اید.')
+      toast.error('مشکلی پیش آمد.')
 
     } finally {
 
@@ -72,7 +72,7 @@ export default function CellAction(props: CellActionProps) {
           </DropdownMenuLabel>
           <DropdownMenuItem
             className="cursor-pointer hover:text-yellow-700 transition-colors"
-            onClick={() => push(`/${params.storeId}/billboards/${data.id}`)}
+            onClick={() => push(`/${params.storeId}/products/${data.id}`)}
           >
             <Edit className="ml-2 h-4 w-4" />
             {"ویرایش"}

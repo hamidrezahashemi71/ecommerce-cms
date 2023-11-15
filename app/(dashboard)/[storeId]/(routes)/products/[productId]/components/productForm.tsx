@@ -105,7 +105,7 @@ export default function ProductForm(props: ProductFormProps) {
 
     } catch (error) {
 
-      toast.error('مطمئن شوید که تمامی دسته بندی های این بیلبورد را حذف کرده اید.')
+      toast.error('مشکلی پیش آمد.')
 
     } finally {
 
@@ -162,8 +162,8 @@ export default function ProductForm(props: ProductFormProps) {
                   />
                 </FormControl>
                 <FormMessage>
-                    {"بارگزاری تصویر بیلبورد الزامی است."}
-                  </FormMessage>
+                  {"بارگزاری تصویر بیلبورد الزامی است."}
+                </FormMessage>
               </FormItem>
             )}
           />
@@ -315,13 +315,19 @@ export default function ProductForm(props: ProductFormProps) {
                       </FormControl>
                       <SelectContent>
                         {colors.map((color) => (
-                          <SelectItem
-                            className="cursor-pointer"
-                            key={color.id}
-                            value={color.id}
-                          >
-                            {color.value}
-                          </SelectItem>
+                          <div className="flex items-center justify-between gap-2">
+                            <SelectItem
+                              className="cursor-pointer"
+                              key={color.id}
+                              value={color.id}
+                            >
+                              {color.value}
+                            </SelectItem>
+                            <div
+                              className="h-6 w-6 rounded-full border"
+                              style={{ backgroundColor: color.value }}
+                            />
+                          </div>
                         ))}
                       </SelectContent>
                     </Select>

@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import CellAction from "./cellAction"
+import { CheckCircle, XCircle } from "lucide-react"
 
 export type ProductColumn = {
   id: string
@@ -22,11 +23,21 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "isArchived",
-    header: "ناموجود",
+    header: "وضعیت موجودی",
+    cell: ({ row }) => (
+        !row.original.isArchived
+        ? <CheckCircle className="h-4 w-4 text-green-500" />
+        : <XCircle className="h-4 w-4 text-red-500" />
+    )
   },
   {
     accessorKey: "isFeatured",
     header: "فروش ویژه",
+    cell: ({ row }) => (
+      row.original.isFeatured
+      ? <CheckCircle className="h-4 w-4 text-green-500" />
+      : <XCircle className="h-4 w-4 text-red-500" />
+  )
   },
   {
     accessorKey: "price",
